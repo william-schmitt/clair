@@ -1,0 +1,5 @@
+General:
+  clair_url: 'https://localhost:6060'
+Plugins:
+    Docker:
+        class: paclair.plugins.docker_plugin.DockerPlugin

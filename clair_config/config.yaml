@@ -20,7 +20,7 @@ clair:
     options:
       # PostgreSQL Connection string
       # https://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING
-      source: host=localhost port=5432 user=postgres sslmode=disable statement_timeout=60000
+      source: postgres://ub10k7pl0m1cq3:p00f3b5ceadf4fb08ea509384a6afcc3980c4ec4bb4ee8984952bed368d5e3d1a@ec2-54-236-163-251.compute-1.amazonaws.com:5432/dbohbnttv93rlp 
 
       # Number of elements kept in the cache
       # Values unlikely to change (e.g. namespaces) are cached in order to save prevent needless roundtrips to the database.
@@ -33,7 +33,7 @@ clair:
 
   api:
     # v3 grpc/RESTful API server address
-    addr: "0.0.0.0:6060"
+    addr: "0.0.0.0:8080"
 
     # Health server address
     # This is an unencrypted endpoint useful for load balancers to check to healthiness of the clair server.
@@ -97,3 +97,4 @@ clair:
 
       # Optional HTTP Proxy: must be a valid URL (including the scheme).
       proxy:
+

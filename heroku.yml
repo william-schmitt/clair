@@ -1,0 +1,7 @@
+setup:
+    addons:
+    - plan: heroku-postgresql
+build:
+    docker:
+        web: Dockerfile
+# don't specify a `run` section and the docker-CMD will be used 

@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+ARG PORT
+ARG DATABASE_URL
+
 FROM golang:1.10-alpine AS build
 RUN apk add --no-cache git
 ADD .   /go/src/github.com/coreos/clair/
@@ -22,6 +25,5 @@ RUN export CLAIR_VERSION=$(git describe --tag --always --dirty) && \
 FROM alpine:3.8
 COPY --from=build /go/src/github.com/coreos/clair/clair /clair
 RUN apk add --no-cache git rpm xz ca-certificates dumb-init
-ENTRYPOINT ["/usr/bin/dumb-init", "--", "/clair"]
-VOLUME /config
-EXPOSE 6060 6061
+COPY clair_config/config.yaml /config
+CMD ["/usr/bin/dumb-init", "--", "/clair"]
