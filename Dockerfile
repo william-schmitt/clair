@@ -24,4 +24,4 @@ COPY --from=build /go/src/github.com/coreos/clair/clair /clair
 RUN apk add --no-cache git rpm xz ca-certificates dumb-init
 COPY ./clair_config.yaml /etc/config/config.yaml
 CMD ["/usr/bin/dumb-init", "--", "/clair"]
-# EXPOSE 80 <-- this is the only thing that heroku will honor=
+EXPOSE 80 
