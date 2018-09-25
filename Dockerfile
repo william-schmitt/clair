@@ -16,12 +16,12 @@ FROM golang:1.10-alpine AS build
 RUN apk add --no-cache git
 ADD .   /go/src/github.com/coreos/clair/
 WORKDIR /go/src/github.com/coreos/clair/
-RUN export CLAIR_VERSION=$(git describe --tag --always --dirty) && \
-	go build -ldflags "-X github.com/coreos/clair/pkg/version.Version=$CLAIR_VERSION" github.com/coreos/clair/cmd/clair
+RUN export CLAIR_VERSION=v2.3.0 && \
+	go build -ldflags "-X github.com/coreos/clair/pkg/version.Version=v2.3.0" github.com/coreos/clair/cmd/clair
 
 FROM alpine:3.8
 COPY --from=build /go/src/github.com/coreos/clair/clair /clair
 RUN apk add --no-cache git rpm xz ca-certificates dumb-init
 COPY ./clair_config.yaml /config/config.yaml
-ENTRYPOINT ["/usr/bin/dumb-init", "--", "/clair"]
+CMD ["/usr/bin/dumb-init", "--", "/clair"]
 # EXPOSE 80 <-- this is the only thing that heroku will honor=
