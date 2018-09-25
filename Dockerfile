@@ -22,6 +22,6 @@ RUN export CLAIR_VERSION=$(git describe --tag --always --dirty) && \
 FROM alpine:3.8
 COPY --from=build /go/src/github.com/coreos/clair/clair /clair
 RUN apk add --no-cache git rpm xz ca-certificates dumb-init
-ENTRYPOINT ["/usr/bin/dumb-init", "--", "/clair"]
-VOLUME /config
-EXPOSE 6060 6061
+COPY ./config.yaml /etc/clair/config.yaml
+CMD ["/usr/bin/dumb-init", "--", "/clair"]
+EXPOSE 8080 6061

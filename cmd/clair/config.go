@@ -16,6 +16,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"time"
@@ -115,6 +116,8 @@ func LoadConfig(path string) (config *Config, err error) {
 			return
 		}
 	}
-
+	// Heroku Overrides
+	config.API.Addr = fmt.Sprintf("0.0.0.0:%v", os.Getenv("PORT"))
+	config.Database.Options["source"] = os.Getenv("DATABASE_URL")
 	return
 }

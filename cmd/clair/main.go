@@ -16,6 +16,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"math/rand"
 	"os"
 	"os/exec"
@@ -181,6 +182,7 @@ func Boot(config *Config) {
 }
 
 func main() {
+	fmt.Println("@@@ look! look! this is the port I got! ", os.Getenv("PORT"))
 	// Parse command-line arguments
 	flag.CommandLine = flag.NewFlagSet(os.Args[0], flag.ExitOnError)
 	flagConfigPath := flag.String("config", "/etc/clair/config.yaml", "Load configuration from the specified file.")

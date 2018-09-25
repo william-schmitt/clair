@@ -20,8 +20,7 @@ clair:
     options:
       # PostgreSQL Connection string
       # https://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING
-      source: helpmeplz 
-
+      source: "localhost:8080"
       # Number of elements kept in the cache
       # Values unlikely to change (e.g. namespaces) are cached in order to save prevent needless roundtrips to the database.
       cachesize: 16384
@@ -33,7 +32,7 @@ clair:
 
   api:
     # v3 grpc/RESTful API server address
-    addr: "0.0.0.0:888888888888"
+    addr: "0.0.0.0:8080"
 
     # Health server address
     # This is an unencrypted endpoint useful for load balancers to check to healthiness of the clair server.
