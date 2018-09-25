@@ -4,7 +4,7 @@
 	"package": [],
 	"rootPath": "github.com/william-schmitt/clair",
     "heroku": {
-        "install" : [ "./cmd/clar/..." ], 
+        "install" : [ "./cmd/..." ], 
         "goVersion": "go1.9"
     }
 }
