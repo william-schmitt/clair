@@ -1,1 +1,1 @@
-web: herokuwrap.sh
+web: sh herokuwrap.sh
