@@ -15,7 +15,7 @@
 ARG PORT
 
 FROM golang:1.10-alpine AS build
-RUN apk add --no-cache git python 
+RUN apk add --no-cache git 
 ADD .   /go/src/github.com/coreos/clair/
 WORKDIR /go/src/github.com/coreos/clair/
 RUN export CLAIR_VERSION=v2.3.0 && \
@@ -23,8 +23,9 @@ RUN export CLAIR_VERSION=v2.3.0 && \
 
 FROM alpine:3.8
 COPY --from=build /go/src/github.com/coreos/clair/clair /clair
-RUN apk add --no-cache git rpm xz ca-certificates dumb-init
+RUN apk add --no-cache git rpm xz ca-certificates dumb-init python
 COPY ./clair_config/config.raw.yaml /etc/clair/config.raw.yaml
+COPY ./herokify.py  /herokuify.py
 COPY ./heroku-wrap-clair.sh /heroku-wrap-clair.sh
 CMD ["/heroku-wrap-clair.sh", "PORT=${PORT}"]
 #CMD ["/usr/bin/dumb-init", "--", "/clair"]

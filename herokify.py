@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 # writing this as python2/3 ambiguous
 
-import yaml, os, sys
+import os, sys
 
-def load_dynamic_env_variables(pair_list, target_dict)
+def load_dynamic_env_variables(pair_list, target_dict):
     """ assumes that the <pair_list> is a list of strings of the form `VAR=VALUE` """
     # turn <pair_list> into tuples and load into the environment
     for key, value in {item[0]:item[1] for item in pair_list.split('=') if len(item) == 2}:
