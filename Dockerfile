@@ -23,5 +23,7 @@ FROM alpine:3.8
 COPY --from=build /go/src/github.com/coreos/clair/clair /clair
 RUN apk add --no-cache git rpm xz ca-certificates dumb-init
 COPY ./clair_config.yaml /etc/clair/config.yaml
-CMD ["/usr/bin/dumb-init", "--", "/clair"]
+COPY ./heroku-wrap-clair.sh /heroku-wrap-clair.sh
+CMD ["/heroku-wrap-clair.sh"]
+#CMD ["/usr/bin/dumb-init", "--", "/clair"]
 EXPOSE 80 
