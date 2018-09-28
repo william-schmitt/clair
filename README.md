@@ -1,3 +1,21 @@
+# Clair on Heroku!
+###### _clairoku? hlair? herair?_
+To build and ship this on Heroku, clone the repository at this branch (`build-from-source`) and run the following:
+```
+h addons:create heroku-postgresql:standard-0 # provision a pgsql db
+h container:push web -a <app_name> # add the container to the registry
+h container:relelase web -a <app_name> # release clair 
+```
+
+There are a few modifications that were needed to get this to work on Heroku.
+- Disabled the usage of `VOLUME`s
+- Reconfigured how clair uses config variables
+- Temporarily disabled health checks (PORT:6061)
+
+Notes:
+- Runs Clair v2
+
+*********** 
 # Clair
 
 [![Build Status](https://api.travis-ci.org/coreos/clair.svg?branch=master "Build Status")](https://travis-ci.org/coreos/clair)
